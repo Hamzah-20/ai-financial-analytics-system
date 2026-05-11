@@ -449,25 +449,25 @@ Model: ARIMA (p=2, d=1, q=2)
 ## System Preview
 
 ###  Main Dashboard
-<img width="988" height="839" alt="image" src="https://github.com/user-attachments/assets/a4a8cca1-6e98-431c-b072-844c5dda4630" />
+<img width="988" height="839" alt="image" src="https://github.com/user-attachments/assets/52f36827-3374-4ac9-8917-72272efd79c7" />
 
 ###  Data Upload & Preview
-<img width="977" height="1073" alt="127 0 0 1_5000_" src="https://github.com/user-attachments/assets/3b68ade1-9071-4796-9154-31ccebd58960" />
+<img width="925" height="1183" alt="127 0 0 1_5000_ (5)" src="https://github.com/user-attachments/assets/da237f99-d3dc-44cd-8d98-e35e690a74b4" />
 
 ###  Model Selection
-<img width="950" height="904" alt="image" src="https://github.com/user-attachments/assets/00c3ac9e-91d7-45c9-ac9f-edae694ffac3" />
+<img width="950" height="904" alt="image" src="https://github.com/user-attachments/assets/6c12a7f1-3eac-45e0-85fb-b3c151017b84" />
 
 ###  Time Series Forecasting
-<img width="921" height="1720" alt="127 0 0 1_5000_ (3)" src="https://github.com/user-attachments/assets/5af5c408-431b-42f0-8dd1-a15aeaab6e7a" />
+<img width="921" height="1720" alt="127 0 0 1_5000_ (3)" src="https://github.com/user-attachments/assets/0df9f608-6376-4993-8c41-2e305caa279a" />
 
 ###  Classification Results
-<img width="922" height="1396" alt="127 0 0 1_5000_ (4)" src="https://github.com/user-attachments/assets/33bb1e89-7de0-442c-b6fa-d96665d6147f" />
+<img width="922" height="1396" alt="127 0 0 1_5000_ (4)" src="https://github.com/user-attachments/assets/02fbc8bc-b760-4476-b7c4-0fc84c84b039" />
 
 ###  Clustering Visualization
-<img width="992" height="1580" alt="127 0 0 1_5000_" src="https://github.com/user-attachments/assets/31450ad3-4e42-4afd-8aac-e688242e6b2b" />
+<img width="1033" height="1610" alt="127 0 0 1_5000_ (1)" src="https://github.com/user-attachments/assets/f4d096ba-4a77-4c02-890b-45144de8a7ce" />
 
 ###  Report Generation
-<img width="1026" height="1514" alt="127 0 0 1_5000_ (2)" src="https://github.com/user-attachments/assets/91b6f065-e6ea-476a-b2e7-b21635bc06a1" />
+<img width="939" height="1479" alt="127 0 0 1_5000_ (6)" src="https://github.com/user-attachments/assets/12ec6cea-3bec-43ec-869a-a044c7882619" />
 
 ---
 
