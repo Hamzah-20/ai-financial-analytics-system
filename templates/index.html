@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Banking Predictive Analytics</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
+<body>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<div class="container">
+
+  <div class="header">
+    <div class="header-pill"><span>Banking Analytics Platform</span></div>
+    <h1>Predictive Analytics <span class="gradient-text">Suite</span></h1>
+    <p class="header-sub">Statistical models and machine learning for financial and banking data analysis</p>
+    <div class="model-pills">
+      <span class="model-pill pill-ts">Time Series</span>
+      <span class="model-pill pill-reg">Regression</span>
+      <span class="model-pill pill-cls">Classification</span>
+      <span class="model-pill pill-clu">Clustering</span>
+    </div>
+  </div>
+
+  <div class="step-nav" id="stepNav">
+    <div class="step-node active" id="sn1" onclick="tryGoToStep(1)">
+      <div class="step-circle" id="sc1">1</div>
+      <div class="step-label">Upload Data</div>
+    </div>
+    <div class="step-track" id="st1"></div>
+    <div class="step-node locked" id="sn2" onclick="tryGoToStep(2)">
+      <div class="step-circle" id="sc2">2</div>
+      <div class="step-label">Select Model</div>
+    </div>
+    <div class="step-track" id="st2"></div>
+    <div class="step-node locked" id="sn3" onclick="tryGoToStep(3)">
+      <div class="step-circle" id="sc3">3</div>
+      <div class="step-label">Configure</div>
+    </div>
+    <div class="step-track" id="st3"></div>
+    <div class="step-node locked" id="sn4" onclick="tryGoToStep(4)">
+      <div class="step-circle" id="sc4">4</div>
+      <div class="step-label">Results</div>
+    </div>
+    <div class="step-track" id="st4"></div>
+    <div class="step-node locked" id="sn5" onclick="tryGoToStep(5)">
+      <div class="step-circle" id="sc5">5</div>
+      <div class="step-label">Export</div>
+    </div>
+  </div>
+
+  <div class="card" id="sec1">
+    <div class="section-title">
+      <div class="title-row"><span class="icon">⬆</span><h2>Upload Your Dataset</h2></div>
+      <p>Supports CSV, Excel (.xlsx/.xls), and JSON — gold prices, stocks, bank revenues, economic data</p>
+    </div>
+
+    <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
+      <div class="upload-icon">📂</div>
+      <h3>Drag & drop your file here</h3>
+      <p>Or click to browse files from your computer</p>
+      <input type="file" id="fileInput" accept=".csv,.xlsx,.xls,.json" style="display:none">
+    </div>
+
+    <div class="divider" style="margin:24px 0 16px"><span>or use sample data</span></div>
+    <div style="text-align:center">
+      <button class="btn-ghost" onclick="loadSampleData()">Load Sample Banking Data</button>
+    </div>
+
+    <div id="uploadPreview" style="display:none">
+      <div class="file-banner" id="fileBanner">
+        <span class="file-banner-icon">✅</span>
+        <div>
+          <div class="file-banner-name" id="fileName"></div>
+          <div class="file-banner-meta" id="fileMeta"></div>
+        </div>
+      </div>
+      <div class="preview-wrap" id="previewTable"></div>
+    </div>
+  </div>
+
+  <div class="card" id="sec2" style="display:none">
+    <div class="section-title">
+      <div class="title-row"><span class="icon">⚙</span><h2>Select Analysis Model</h2></div>
+      <p>Choose the methodology that best fits your financial data and analysis goals</p>
+    </div>
+
+    <div class="model-grid">
+      <div class="model-card" id="mc-timeseries" onclick="selectModel('timeseries')">
+        <div class="m-icon">📈</div>
+        <h3 style="color:var(--ts-color)">Time Series</h3>
+        <div class="m-sub" style="color:var(--ts-color)">AR · MA · ARMA · ARIMA</div>
+        <p class="m-desc">Forecast future values from historical temporal patterns</p>
+      </div>
+      <div class="model-card" id="mc-regression" onclick="selectModel('regression')">
+        <div class="m-icon">📊</div>
+        <h3 style="color:var(--reg-color)">Regression</h3>
+        <div class="m-sub" style="color:var(--reg-color)">Linear · Ridge · OLS</div>
+        <p class="m-desc">Model relationships between continuous financial variables</p>
+      </div>
+      <div class="model-card" id="mc-classification" onclick="selectModel('classification')">
+        <div class="m-icon">🗂️</div>
+        <h3 style="color:var(--cls-color)">Classification</h3>
+        <div class="m-sub" style="color:var(--cls-color)">Logistic · Random Forest</div>
+        <p class="m-desc">Categorize data into discrete risk or performance classes</p>
+      </div>
+      <div class="model-card" id="mc-clustering" onclick="selectModel('clustering')">
+        <div class="m-icon">🔵</div>
+        <h3 style="color:var(--clu-color)">Clustering</h3>
+        <div class="m-sub" style="color:var(--clu-color)">K-Means</div>
+        <p class="m-desc">Discover hidden segments and patterns in customer data</p>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-secondary" onclick="goToStep(1)">← Back</button>
+      <button class="btn-primary-grad" id="btnStep2Next" onclick="goToStep(3)" disabled>Continue →</button>
+    </div>
+  </div>
+
+  <div class="card" id="sec3" style="display:none">
+    <div class="section-title">
+      <div class="title-row"><span class="icon"></span><h2>Configure Variables</h2></div>
+      <p>Select the target column to predict and the feature column to use as input</p>
+    </div>
+
+    <div class="info-banner" id="modelInfoBanner" style="display:none"></div>
+
+    <div class="two-col" style="margin-bottom:20px">
+      <div class="form-group">
+        <label class="form-label"> Target Variable (what to predict)</label>
+        <select class="form-select" id="targetSelect"><option value="">Select target...</option></select>
+        <span style="font-size:12px;color:var(--text-muted);margin-top:4px">Revenue · Profit · Risk score · Price</span>
+      </div>
+      <div class="form-group">
+        <label class="form-label"> Feature Variable (predictor)</label>
+        <select class="form-select" id="featureSelect"><option value="">Select feature (optional)</option></select>
+        <span style="font-size:12px;color:var(--text-muted);margin-top:4px">Date · Period index · Independent variable</span>
+      </div>
+    </div>
+
+    <div class="card-inner" id="tsParams" style="display:none;margin-bottom:20px">
+      <p style="margin-bottom:14px;font-weight:600;color:var(--ts-color);font-size:14px">⚙ ARIMA Parameters</p>
+      <div class="four-col">
+        <div class="form-group">
+          <label class="form-label">Model Type</label>
+          <select class="form-select" id="tsModel">
+            <option value="AR">AR</option><option value="MA">MA</option>
+            <option value="ARMA">ARMA</option><option value="ARIMA" selected>ARIMA</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">p (AR order)</label>
+          <input type="number" class="form-input" id="tsP" value="1" min="0" max="5">
+        </div>
+        <div class="form-group">
+          <label class="form-label">d (Differencing)</label>
+          <input type="number" class="form-input" id="tsD" value="1" min="0" max="2">
+        </div>
+        <div class="form-group">
+          <label class="form-label">q (MA order)</label>
+          <input type="number" class="form-input" id="tsQ" value="1" min="0" max="5">
+        </div>
+      </div>
+    </div>
+
+    <div class="card-inner" id="clusterParams" style="display:none;margin-bottom:20px">
+      <p style="margin-bottom:14px;font-weight:600;color:var(--clu-color);font-size:14px">⚙ K-Means Parameters</p>
+      <div style="max-width:220px">
+        <div class="form-group">
+          <label class="form-label">Number of Clusters (k)</label>
+          <input type="number" class="form-input" id="nClusters" value="3" min="2" max="10">
+        </div>
+      </div>
+    </div>
+
+    <div id="modelConfig" style="display:none;margin-bottom:20px">
+      <div class="card-inner" style="display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div id="configBadge" style="display:inline-block;font-size:13px;font-weight:700;padding:4px 14px;border-radius:100px;margin-bottom:8px"></div>
+          <p id="configDesc" style="font-size:13px;color:var(--text-muted);margin:0"></p>
+        </div>
+        <button class="btn-success" id="trainBtn" onclick="trainModel()"> Train Model</button>
+      </div>
+    </div>
+
+    <div id="step3Metrics" style="display:none;margin-bottom:20px">
+      <p style="font-size:12px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:12px">Performance Metrics</p>
+      <div class="metrics-row" id="metricsRow3"></div>
+    </div>
+
+    <div id="step3Plot" style="display:none;margin-bottom:20px">
+      <div class="card-inner" style="padding:14px">
+        <img id="step3PlotImg" style="width:100%;border-radius:8px" alt="visualization">
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-secondary" onclick="goToStep(2)">← Back</button>
+      <button class="btn-ghost" id="setupBtn" onclick="setupModel()">⚙ Confirm Settings</button>
+      <button class="btn-primary-grad" id="goStep4Btn" onclick="goToStep(4)" style="display:none">View Results →</button>
+    </div>
+  </div>
+
+  <div class="card" id="sec4" style="display:none">
+    <div class="section-title">
+      <div class="title-row"><span class="icon"></span><h2>Results & Analysis</h2></div>
+      <p>Model trained and ready — review performance metrics and make predictions</p>
+    </div>
+
+    <div id="step4Metrics" style="margin-bottom:24px">
+      <p style="font-size:12px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:12px">Performance Metrics</p>
+      <div class="metrics-row" id="metricsRow4"></div>
+    </div>
+
+    <div id="step4Plot" style="display:none;margin-bottom:24px">
+      <div class="card-inner" style="padding:14px">
+        <img id="step4PlotImg" style="width:100%;border-radius:8px" alt="visualization">
+      </div>
+    </div>
+
+    <div class="card glow" style="margin-bottom:24px">
+      <p style="font-weight:700;color:var(--text-primary);font-size:15px;margin-bottom:16px">⚡ Make a Prediction</p>
+      <div class="predict-box">
+        <input class="predict-input" id="predictInput" placeholder="Enter value for prediction..." onkeydown="if(event.key==='Enter') makePrediction()">
+        <button class="btn-primary-grad" onclick="makePrediction()" id="predictBtn">Predict</button>
+      </div>
+      <div class="predict-hints">
+        <span class="predict-hint"><strong>Time Series:</strong> # of future periods</span>
+        <span class="predict-hint"><strong>Regression:</strong> independent variable value</span>
+        <span class="predict-hint"><strong>Classification:</strong> feature value</span>
+        <span class="predict-hint"><strong>Clustering:</strong> data point value</span>
+      </div>
+      <div id="predResult"></div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-secondary" onclick="goToStep(3)">← Back</button>
+      <button class="btn-primary-grad" onclick="goToStep(5)">Reports & Export →</button>
+    </div>
+  </div>
+
+  <div class="card" id="sec5" style="display:none">
+    <div class="section-title">
+      <div class="title-row"><span class="icon">📁</span><h2>Reports & Export</h2></div>
+      <p>Generate analytical insights and export your analysis for presentations</p>
+    </div>
+
+    <div class="export-grid">
+      <div class="export-card">
+        <div class="export-icon"></div>
+        <h3>Analytical Report</h3>
+        <p>Detailed insights, economic interpretations, and recommendations</p>
+        <button class="btn-ghost" style="color:var(--blue-light);border-color:rgba(56,189,248,0.35) ; margin:15px 0 0 0" onclick="generateReport()" id="reportBtn">Generate Report</button>
+      </div>
+      <div class="export-card">
+        <div class="export-icon"></div>
+        <h3>Python Notebook</h3>
+        <p>Export full analysis as a reproducible .py script</p>
+        <button class="btn-ghost" style="color:var(--purple-light);border-color:rgba(167,139,250,0.35) ; margin: 33px 0 0 0" onclick="exportNotebook()" id="exportBtn">Export .py</button>
+      </div>
+      <div class="export-card">
+        <div class="export-icon"></div>
+        <h3>Model Comparison</h3>
+        <p>Benchmark all model types against your dataset to find the best fit</p>
+        <button class="btn-ghost" style="color:var(--green-light);border-color:rgba(52,211,153,0.35); margin:30px 0 0 0" onclick="compareModels()" id="compareBtn">Run Comparison</button>
+      </div>
+    </div>
+
+    <div id="reportOutput" style="display:none;margin-bottom:24px"></div>
+
+    <div id="compareOutput" style="display:none;margin-bottom:24px"></div>
+
+    <div class="btn-row" style="justify-content:space-between">
+      <button class="btn-secondary" onclick="goToStep(4)">← Back</button>
+      <button class="btn-danger" onclick="clearAll()">🗑 Clear All & Restart</button>
+    </div>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>
