@@ -242,8 +242,8 @@ Integrated-Banking-Predictive-Analytics-System/
 ### Clone Repository
 
 ```bash
-git clone https://github.com/Hamzah-20/ai-manual-analyzer.git
-cd banking-predictive-analytics
+git clone https://github.com/Hamzah-20/ai-financial-analytics-system.git
+cd ai-financial-analytics-system
 ```
 
 ### Install Dependencies
@@ -609,13 +609,10 @@ This workflow demonstrates the complete machine learning pipeline from raw data 
 
 ## Author
 
+**Hamzah Al-Basyouni**
 **AI & Machine Learning Developer**
 
-Specialized in:
-- Financial Analytics & Banking AI
-- Predictive Modeling & Time Series Analysis
-- Full-Stack ML Systems
-- Arabic/English Bilingual Applications
+Focused on Machine Learning, Predictive Analytics, Computer Vision, and Intelligent Systems.
 
 GitHub: [Hamzah-20](https://github.com/Hamzah-20)
 
