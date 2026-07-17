@@ -13,7 +13,7 @@
 
 ## Overview
 
-**Live Project Repository:** [[AI Financial Analytics System]( https://github.com/Hamzah-20/ai-manual-analyzer)]
+**Live Project Repository:** [AI Financial Analytics System]( https://github.com/Hamzah-20/ai-manual-analyzer)
 
 The **Integrated Banking Predictive Analytics System** is a full-stack machine learning platform specifically designed for financial and banking data analysis. It automatically detects your data type and applies the appropriate predictive model, making it ideal for:
 
